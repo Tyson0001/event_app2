@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'event_details_page.dart';
 import '../models/user.dart';
-import 'attendees_page.dart'; // Import for attendees page
+import 'attendees_page.dart';
 
 class HomePage extends StatelessWidget {
   final List<Map<String, String>> events = [
-    {'title': 'Music Concert', 'date': '2024-11-15', 'location': 'Hall A'},
-    {'title': 'Art Exhibition', 'date': '2024-12-01', 'location': 'Gallery'},
+    {'title': 'Himalayas Startup Trek', 'date': '2024-11-15', 'location': 'Hall A'},
   ];
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark; // Check if dark mode is enabled
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Colors.red, // Set AppBar color to red
+        backgroundColor: Colors.red,
         actions: [
           IconButton(
             icon: Icon(Icons.person),
@@ -32,7 +31,7 @@ class HomePage extends StatelessWidget {
         children: [
           // Background Image
           Image.asset(
-            'assets/images/backgroundimage.jpg', // Path to your background image
+            'assets/images/backgroundimage.jpg',
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
               return Center(
@@ -45,7 +44,7 @@ class HomePage extends StatelessWidget {
           ),
           // Semi-transparent overlay for readability
           Container(
-            color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.5), // Adjust overlay based on theme
+            color: isDarkMode ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.5),
           ),
           // List of events
           ListView.builder(
@@ -55,34 +54,33 @@ class HomePage extends StatelessWidget {
               return Card(
                 margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12), // Rounded corners
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                elevation: 4, // Adds slight shadow for depth
-                color: isDarkMode ? Colors.grey[800] : Colors.white, // Card color based on theme
+                elevation: 4,
+                color: isDarkMode ? Colors.grey[800] : Colors.white,
                 child: ListTile(
                   title: Text(
                     event['title']!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.white : Colors.black, // Title text color
+                      color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                   subtitle: Text(
                     '${event['date']} - ${event['location']}',
                     style: TextStyle(
-                      color: isDarkMode ? Colors.white70 : Colors.black87, // Subtitle text color
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(
+                    Navigator.pushNamed(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => EventDetailsPage(event: event),
-                      ),
+                      '/eventDetails',
+                      arguments: event,
                     );
                   },
                   trailing: IconButton(
-                    icon: Icon(Icons.people, color: Colors.red), // Optional color change
+                    icon: Icon(Icons.people, color: Colors.red),
                     tooltip: 'View Attendees',
                     onPressed: () {
                       Navigator.push(

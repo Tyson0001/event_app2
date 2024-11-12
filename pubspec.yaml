@@ -20,7 +20,8 @@ dependencies:
   google_fonts: ^6.2.1        # For using Google Fonts
   dio: ^5.0.0
   qr_code_scanner: ^0.7.0
-  permission_handler: ^10.2.0 # Alternative for HTTP requests with more features
+  permission_handler: ^10.2.0
+  url_launcher: ^6.3.1 # Alternative for HTTP requests with more features
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0
@@ -41,7 +42,12 @@ flutter:
   assets:
     - assets/images/backgroundimage.jpg
     - assets/images/backgroundimage2.jpg
-    - assets/icons/ # Ensure this directory exists and contains icons
+    - assets/icons/icon.png
+    - assets/images/event1.jpg
+    - assets/images/event2.jpg
+    - assets/images/event3.jpg
+    - assets/events.json
+    # Ensure this directory exists and contains icons
 
 # Optional: Add a section for fonts if you have custom fonts
 fonts:

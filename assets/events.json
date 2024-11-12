@@ -1,0 +1,15 @@
+{
+  "28th Sept": [
+    {"title": "Opening Ceremony", "time": "10:00 AM", "venue": "Main Hall"},
+    {"title": "Keynote Speech", "time": "11:00 AM", "venue": "Conference Room A"}
+  ],
+  "29th Sept": [
+    {"title": "Workshop on AI", "time": "9:00 AM", "venue": "Lab 1"}
+  ],
+  "30th Sept": [
+    {"title": "Panel Discussion", "time": "2:00 PM", "venue": "Auditorium"}
+  ],
+  "1st Oct": [
+    {"title": "Closing Ceremony", "time": "5:00 PM", "venue": "Main Hall"}
+  ]
+}
