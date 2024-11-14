@@ -1,55 +1,70 @@
 import 'package:flutter/material.dart';
-import '../models/user.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
-class UserProfilePage extends StatelessWidget {
-  final User user;
+class UserProfilePage extends StatefulWidget {
+  final String username;
+  final String email;
+  final String profession;
 
-  UserProfilePage({required this.user});
+  const UserProfilePage({
+    super.key,
+    required this.username,
+    required this.email,
+    required this.profession,
+  });
 
+  @override
+  _UserProfilePageState createState() => _UserProfilePageState();
+}
+
+class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
-        backgroundColor: Colors.red, // Set AppBar color to match the theme
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background Image
-          Image.asset(
-            'assets/images/backgroundimage2.jpg', // Path to your background image
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Center(
-                child: Text(
-                  'Image not available',
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
+        title: const Text('User Profile'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popAndPushNamed(context, "/scan"); // Navigate to scan page
             },
-          ),
-          // Semi-transparent overlay for readability
-          Container(
-            color: Colors.white.withOpacity(0.5), // Dark overlay for better text visibility
-          ),
-          // User Profile Content
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Username: ${user.username}', style: TextStyle(fontSize: 16, color: Colors.black)),
-                Text('Email: ${user.email}', style: TextStyle(fontSize: 16, color: Colors.black)),
-                SizedBox(height: 20),
-                Text('Registered Events:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black)),
-                Text('Music Concert on 2024-11-15', style: TextStyle(color: Colors.black)),
-                Text('Art Exhibition on 2024-12-01', style: TextStyle(color: Colors.black)),
-              ],
-            ),
+            icon: const Icon(Icons.qr_code_scanner),
           ),
         ],
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              widget.username.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              widget.profession,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
+            ),
+            const SizedBox(height: 20),
+            PrettyQr(
+              data:
+                'Username: ${widget.username}\nEmail: ${widget.email}\nProfession: ${widget.profession}',
+              size: 200,
+              roundEdges: true,
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
     );
   }
-}
+} 
+
+
+
+
+
+

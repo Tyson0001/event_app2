@@ -32,12 +32,50 @@ class MentorPage extends StatelessWidget {
           return Card(
             margin: EdgeInsets.all(8.0),
             child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(mentor['photo']!),
-                radius: 30,
+              leading: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              mentor['photo']!,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                mentor['name']!,
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(mentor['photo']!),
+                  radius: 30,
+                ),
               ),
-              title: Text(mentor['name']!),
-              subtitle: Text(mentor['profession']!),
+              title: Text(
+                mentor['name']!,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                mentor['profession']!,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           );
         },

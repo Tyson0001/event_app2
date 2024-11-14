@@ -17,13 +17,25 @@ class HelplinePage extends StatelessWidget {
     },
   ];
 
-  void _makePhoneCall(String phoneNumber) async {
+  void _makePhoneCall(String phoneNumber, BuildContext context) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneUri)) {
-      await launchUrl(phoneUri);
-    } else {
-      print('Could not launch $phoneNumber');
+    try {
+      if (await launchUrl(phoneUri, mode: LaunchMode.externalApplication)) {
+        // Successfully launched phone dialer
+      } else {
+        _showErrorMessage(context, 'Could not launch $phoneNumber');
+      }
+    } catch (e) {
+      _showErrorMessage(context, 'Error: $e');
     }
+  }
+
+  void _showErrorMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   @override
@@ -43,7 +55,7 @@ class HelplinePage extends StatelessWidget {
               subtitle: Text(helpline['phone']!),
               trailing: IconButton(
                 icon: Icon(Icons.phone),
-                onPressed: () => _makePhoneCall(helpline['phone']!),
+                onPressed: () => _makePhoneCall(helpline['phone']!, context),
               ),
             ),
           );

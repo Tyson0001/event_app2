@@ -1,6 +1,5 @@
-// lib/main.dart
-
 import 'package:flutter/material.dart';
+import 'screens/first_page.dart';
 import 'screens/home_page.dart';
 import 'screens/login_page.dart';
 import 'screens/registration_page.dart';
@@ -22,9 +21,11 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: '/',
+      initialRoute: '/', // Set initial route to FirstPage
       routes: {
-        '/': (context) => LoginPage(),
+        '/': (context) => FirstPage(),
+         // Updated to start with FirstPage
+        '/login': (context) => LoginPage(),
         '/register': (context) => RegistrationPage(),
         '/home': (context) => HomePage(),
       },
@@ -34,7 +35,11 @@ class MyApp extends StatelessWidget {
             if (settings.arguments is User) {
               final user = settings.arguments as User;
               return MaterialPageRoute(
-                builder: (context) => UserProfilePage(user: user),
+                builder: (context) => UserProfilePage(
+                  username: user.username,
+                  email: user.email,
+                  profession: user.profession ?? 'Not provided', // Safe default for profession
+                ),
               );
             }
             return _errorRoute();
@@ -57,8 +62,8 @@ class MyApp extends StatelessWidget {
   Route<dynamic> _errorRoute() {
     return MaterialPageRoute(
       builder: (context) => Scaffold(
-        appBar: AppBar(title: Text("Error")),
-        body: Center(child: Text("Page not found or invalid arguments.")),
+        appBar: AppBar(title: const Text("Error")),
+        body: const Center(child: Text("Page not found or invalid arguments.")),
       ),
     );
   }

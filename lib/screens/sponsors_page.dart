@@ -29,12 +29,48 @@ class SponsorsPage extends StatelessWidget {
           return Card(
             margin: EdgeInsets.all(8.0),
             child: ListTile(
-              leading: Image.asset(
-                sponsor['logo']!,
-                width: 50,
-                height: 50,
+              leading: InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              sponsor['logo']!,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                sponsor['name']!,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Image.asset(
+                  sponsor['logo']!,
+                  width: 50,
+                  height: 50,
+                ),
               ),
-              title: Text(sponsor['name']!),
+              title: Text(
+                sponsor['name']!,
+                style: TextStyle(
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
             ),
           );
         },

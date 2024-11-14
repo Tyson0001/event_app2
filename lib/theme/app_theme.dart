@@ -6,11 +6,9 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: Colors.blue,
       secondary: Colors.blueAccent,
-      background: Colors.white,
       surface: Colors.white,
       onPrimary: Colors.white,
       onSecondary: Colors.black,
-      onBackground: Colors.black,
       onSurface: Colors.black,
     ),
     textTheme: TextTheme(
@@ -39,11 +37,9 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: Colors.blueGrey,
       secondary: Colors.blueAccent,
-      background: Colors.black,
       surface: Colors.black,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
-      onBackground: Colors.white,
       onSurface: Colors.white,
     ),
     textTheme: TextTheme(

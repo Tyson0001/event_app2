@@ -1,15 +1,35 @@
 {
-  "28th Sept": [
-    {"title": "Opening Ceremony", "time": "10:00 AM", "venue": "Main Hall"},
-    {"title": "Keynote Speech", "time": "11:00 AM", "venue": "Conference Room A"}
+  "14 Nov": [
+    {
+      "title": "Opening Ceremony",
+      "time": "11:10 PM",
+      "venue": "Main Hall"
+    },
+    {
+      "title": "Keynote Speech",
+      "time": "7:45 PM",
+      "venue": "Conference Room A"
+    }
   ],
-  "29th Sept": [
-    {"title": "Workshop on AI", "time": "9:00 AM", "venue": "Lab 1"}
+  "29 Sep": [
+    {
+      "title": "Workshop on AI",
+      "time": "7:17 PM",
+      "venue": "Lab 1"
+    }
   ],
-  "30th Sept": [
-    {"title": "Panel Discussion", "time": "2:00 PM", "venue": "Auditorium"}
+  "30 Sep": [
+    {
+      "title": "Panel Discussion",
+      "time": "7:18 PM",
+      "venue": "Auditorium"
+    }
   ],
-  "1st Oct": [
-    {"title": "Closing Ceremony", "time": "5:00 PM", "venue": "Main Hall"}
+  "1 Oct": [
+    {
+      "title": "Closing Ceremony",
+      "time": "7:40 PM",
+      "venue": "Main Hall"
+    }
   ]
 }

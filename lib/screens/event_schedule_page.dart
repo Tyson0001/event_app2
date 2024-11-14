@@ -24,7 +24,7 @@ class EventSchedulePage extends StatelessWidget {
               style: TextStyle(fontSize: 24, color: Colors.white),
             ),
           ),
-          Expanded(child: TabBarSection()), // Wrap TabBarSection in Expanded
+          Expanded(child: TabBarSection()),
         ],
       ),
     );
@@ -32,6 +32,7 @@ class EventSchedulePage extends StatelessWidget {
 }
 
 class TabBarSection extends StatelessWidget {
+  // Function to load event data from the events.json file
   Future<Map<String, dynamic>> loadEventData() async {
     try {
       final jsonString = await rootBundle.loadString('assets/events.json');
@@ -55,8 +56,10 @@ class TabBarSection extends StatelessWidget {
           return Center(child: Text('No events found'));
         } else {
           final eventData = snapshot.data!;
+          final days = eventData.keys.toList(); // Get all the days from the data
+
           return DefaultTabController(
-            length: 4,
+            length: days.length,
             child: Column(
               children: [
                 TabBar(
@@ -66,21 +69,15 @@ class TabBarSection extends StatelessWidget {
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  tabs: [
-                    Tab(text: '28th Sept'),
-                    Tab(text: '29th Sept'),
-                    Tab(text: '30th Sept'),
-                    Tab(text: '1st Oct'),
-                  ],
+                  isScrollable: true,
+                  tabs: days.map((day) => Tab(text: day)).toList(),
                 ),
-                Expanded( // Wrap TabBarView in Expanded to give it constraints
+                Expanded(
                   child: TabBarView(
-                    children: [
-                      EventList(day: '28th Sept', events: eventData['28th Sept'] ?? []),
-                      EventList(day: '29th Sept', events: eventData['29th Sept'] ?? []),
-                      EventList(day: '30th Sept', events: eventData['30th Sept'] ?? []),
-                      EventList(day: '1st Oct', events: eventData['1st Oct'] ?? []),
-                    ],
+                    children: days.map((day) {
+                      final events = eventData[day] as List<dynamic>? ?? [];
+                      return EventList(day: day, events: events);
+                    }).toList(),
                   ),
                 ),
               ],
@@ -98,6 +95,51 @@ class EventList extends StatelessWidget {
 
   EventList({required this.day, required this.events});
 
+  DateTime? _parseDateTime(String day, String time) {
+    try {
+      final dateParts = day.split(' ');
+      if (dateParts.length != 2) return null;
+
+      final month = _getMonthNumber(dateParts[1]);
+      final dayNumber = int.parse(dateParts[0]);
+
+      final timeParts = time.split(' ');
+      final timeString = timeParts[0];
+      final hourMinute = timeString.split(':');
+      int hour = int.parse(hourMinute[0]);
+      final minute = int.parse(hourMinute[1]);
+
+      if (timeParts.length > 1) {
+        final amPm = timeParts[1];
+        if (amPm == 'PM' && hour != 12) hour += 12;
+        if (amPm == 'AM' && hour == 12) hour = 0;
+      }
+
+      return DateTime(2024, month, dayNumber, hour, minute);
+    } catch (e) {
+      print("Error parsing date and time: $e");
+      return null;
+    }
+  }
+
+  int _getMonthNumber(String month) {
+    const months = {
+      'Jan': 1,
+      'Feb': 2,
+      'Mar': 3,
+      'Apr': 4,
+      'May': 5,
+      'Jun': 6,
+      'Jul': 7,
+      'Aug': 8,
+      'Sep': 9,
+      'Oct': 10,
+      'Nov': 11,
+      'Dec': 12,
+    };
+    return months[month] ?? 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -105,11 +147,14 @@ class EventList extends StatelessWidget {
       itemCount: events.length,
       itemBuilder: (context, index) {
         final event = events[index];
+        final eventDateTime = _parseDateTime(day, event['time'] ?? '00:00');
+        final eventVenue = event['venue'] ?? 'No venue';
+
         return EventCard(
           title: event['title'] ?? 'No title',
           date: 'Date: $day',
           time: 'Time: ${event['time'] ?? 'No time'}',
-          venue: 'Venue: ${event['venue'] ?? 'No venue'}',
+          venue: 'Venue: $eventVenue',
         );
       },
     );
@@ -122,7 +167,12 @@ class EventCard extends StatelessWidget {
   final String time;
   final String venue;
 
-  EventCard({required this.title, required this.date, required this.time, required this.venue});
+  EventCard({
+    required this.title,
+    required this.date,
+    required this.time,
+    required this.venue,
+  });
 
   @override
   Widget build(BuildContext context) {
