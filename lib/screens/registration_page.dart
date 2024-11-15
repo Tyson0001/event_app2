@@ -59,18 +59,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         fit: StackFit.expand,
         children: [
           // Background Image
-          Image.asset(
-            'assets/images/backgroundimage2.jpg',
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Center(
-                child: Text(
-                  'Image not available',
-                  style: TextStyle(color: Colors.white),
-                ),
-              );
-            },
-          ),
+          
           // Semi-transparent overlay for readability
           Container(
             color: Colors.white.withOpacity(0.5),
