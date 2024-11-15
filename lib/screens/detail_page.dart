@@ -1,6 +1,32 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  String title = '';
+  List<String> description = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadDetails();
+  }
+
+  Future<void> loadDetails() async {
+    final String response = await rootBundle.loadString('assets/details.json');
+    final data = json.decode(response);
+
+    setState(() {
+      title = data['title'];
+      description = List<String>.from(data['description']);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,25 +40,25 @@ class DetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Himalayan Startup Trek',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'The Himalayan Startup Trek (HST) is one of the biggest startup events in the Himalayan region, bringing together startups, mentors, investors, and thought leaders.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'This event is organized annually with the goal of fostering innovation and entrepreneurship in the region, offering networking opportunities, and providing support to startups through mentorship and investments.',
-              style: TextStyle(fontSize: 16),
-            ),
-          ],
-        ),
+        child: title.isNotEmpty
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16),
+                  ...description.map((paragraph) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          paragraph,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      )),
+                ],
+              )
+            : Center(child: CircularProgressIndicator()),
       ),
     );
   }

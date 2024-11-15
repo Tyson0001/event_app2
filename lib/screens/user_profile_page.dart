@@ -41,19 +41,19 @@ class _UserProfilePageState extends State<UserProfilePage> {
             Text(
               widget.username.toUpperCase(),
               style: const TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
             ),
             const SizedBox(height: 10),
-            Text(
-              widget.profession,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-            ),
+            
             const SizedBox(height: 20),
             PrettyQr(
               data:
                 'Username: ${widget.username}\nEmail: ${widget.email}\nProfession: ${widget.profession}',
               size: 200,
-              roundEdges: true,
+              roundEdges: true, 
+              // Adjust QR code colors based on dark or light mode
+              // Adjust QR code colors based on dark or light mode
+              elementColor: Colors.blue,
             ),
             const SizedBox(height: 20),
           ],

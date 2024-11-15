@@ -28,7 +28,8 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   timezone: ^0.10.0
   intl: ^0.19.0
-  pretty_qr_code: ^3.3.0
+  pretty_qr_code: ^3.3.0 
+  
 
 
 dev_dependencies:
@@ -54,7 +55,8 @@ flutter:
     - assets/images/event2.jpg
     - assets/images/event3.jpg
     - assets/events.json 
-    - assets/food.json
+    - assets/food.json 
+    - assets/details.json
     # Ensure this directory exists and contains event-related JSON data
 
 # Optional: Add a section for fonts if you have custom fonts
