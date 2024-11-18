@@ -125,7 +125,7 @@ class _HelplinePageState extends State<HelplinePage> {
 // helplines
     try {
       // Replace this URL with your actual API endpoint
-      final response = await http.get(Uri.parse('https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['eventCode']}/eventCard/helplines'));
+      final response = await http.get(Uri.parse('https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['conferenceCode']}/eventCard/helplines'));
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);

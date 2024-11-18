@@ -1,3 +1,4 @@
+import 'package:event_management_app/screens/qr_scanner_food.dart';
 import 'package:event_management_app/screens/qr_scanner_organizer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,7 @@ class _FirstPageState extends State<FirstPage> {
     } else if (choice == 'Organizers') {
       _navigateToPage(QrScannerOrganizer());
     } else if (choice == 'Catering Vendor') {
-      _navigateToPage(QRScanner());
+      _navigateToPage(QrScannerFood());
     }
   }
 
@@ -67,7 +68,7 @@ class _FirstPageState extends State<FirstPage> {
               child: const Text('Organizers'),
             ),
             ElevatedButton(
-              onPressed: () => _navigateToPage(QRScanner()),
+              onPressed: () => _navigateToPage(QrScannerFood()),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red, // Button color
               ),

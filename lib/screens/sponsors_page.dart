@@ -159,26 +159,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Sponsor {
   final String name;
   final String photo;
-  final String profession;
+  // final String profession;
 
   Sponsor({
     required this.name,
     required this.photo,
-    required this.profession,
+    // required this.profession,
   });
 
   factory Sponsor.fromJson(Map<String, dynamic> json) {
     return Sponsor(
       name: json['name'] ?? '',
       photo: json['photo'] ?? '',
-      profession: json['profession'] ?? '',
+      // profession: json['profession'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
         'name': name,
         'photo': photo,
-        'profession': profession,
+        // 'profession': profession,
       };
 }
 
@@ -212,7 +212,7 @@ class _SponsorPageState extends State<SponsorPage> {
       final response = await http
           .get(
         Uri.parse(
-            'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['eventCode']}/eventCard/sponsors'),
+            'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['conferenceCode']}/eventCard/sponsors'),
       )
           .timeout(
         const Duration(seconds: 10),
@@ -222,8 +222,17 @@ class _SponsorPageState extends State<SponsorPage> {
         },
       );
 
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text('sponsor data fetched and stored successfully! ${response.body}')),
+      //   );
+
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
+
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text('sponsor data fetched and stored successfully! ${data}')),
+        // );
+
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('sponsors', json.encode(data));
@@ -265,8 +274,17 @@ class _SponsorPageState extends State<SponsorPage> {
     });
   }
 
-  Widget _buildSponsorImage(String base64Image) {
+  Widget _buildSponsorImage(String base64Image2) {
     try {
+
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('sponsor data fetched and stored successfully!')),
+    //     );
+     String base64Image = base64Image2;
+      if (base64Image.contains(',')) {
+        base64Image = base64Image2.split(',')[1];
+      }
+
       final imageBytes = base64Decode(base64Image);
       return Image.memory(
         imageBytes,
@@ -276,6 +294,10 @@ class _SponsorPageState extends State<SponsorPage> {
         },
       );
     } catch (e) {
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text('sponsor data error and stored successfully!')),
+      //   );
+      print('Error loading sponsor image: $e');
       return const Icon(Icons.person, size: 40, color: Colors.grey);
     }
   }
@@ -311,13 +333,13 @@ class _SponsorPageState extends State<SponsorPage> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      sponsor.profession,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.grey[600],
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
+                    // Text(
+                    //   sponsor.profession,
+                    //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    //         color: Colors.grey[600],
+                    //       ),
+                    //   textAlign: TextAlign.center,
+                    // ),
                   ],
                 ),
               ),
@@ -419,10 +441,10 @@ class _SponsorPageState extends State<SponsorPage> {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            subtitle: Text(
-              sponsor.profession,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            // subtitle: Text(
+            //   sponsor.profession,
+            //   style: Theme.of(context).textTheme.bodyMedium,
+            // ),
             onTap: () => _showSponsorDetails(sponsor),
           ),
         );

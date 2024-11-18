@@ -160,12 +160,24 @@ class _MentorPageState extends State<MentorPage> {
       errorMessage = '';
     });
 
+
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text('mentor1 data fetched and stored successfully! ${widget.event['eventCode']}')),
+      //   );
+
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(content: Text('mentor1 data fetched and stored successfully! ${widget.event}')),
+      //   );
+
+
     try {
       final response = await http
           .get(
         Uri.parse(
-            'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['eventCode']}/eventCard/mentors'),
+            'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['conferenceCode']}/eventCard/mentors'),
       )
+
+      
           .timeout(
         const Duration(seconds: 10),
         onTimeout: () {
@@ -173,6 +185,12 @@ class _MentorPageState extends State<MentorPage> {
               'Connection timeout. Please check your internet connection.');
         },
       );
+
+
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('mentor data fetched and stored successfully!')),
+        );
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
@@ -186,8 +204,10 @@ class _MentorPageState extends State<MentorPage> {
       }
     } catch (e) {
       setState(() {
+
         errorMessage = e.toString();
       });
+
       await loadStoredMentors();
     } finally {
       setState(() {

@@ -126,7 +126,7 @@ class _DetailPageState extends State<DetailPage> {
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? storedData = prefs.getString('details');
+      String? storedData = prefs.getString('details_stored');
 
       // Load from local storage
       final data = json.decode(storedData!);
@@ -151,12 +151,12 @@ class _DetailPageState extends State<DetailPage> {
 
     try {
       final response = await http.get(Uri.parse(
-          'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['eventCode']}/eventCard/about'));
+          'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['conferenceCode']}/eventCard/about'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('details', json.encode(data));
+        prefs.setString('details_stored', json.encode(data));
 
         setState(() {
           title = data['title'] ?? '';

@@ -637,7 +637,7 @@ class _FoodCounterPageState extends State<FoodCounterPage> {
   }
 
   Future<void> fetchFoodItems(dynamic event) async {
-    final url = 'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['eventCode']}/eventCard/food'; // Replace with actual API URL
+    final url = 'https://gatherhub-r7yr.onrender.com/user/conference/${widget.event['conferenceCode']}/eventCard/food'; // Replace with actual API URL
 
     try {
       final response = await http.get(Uri.parse(url));
