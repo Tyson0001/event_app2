@@ -1,0 +1,20 @@
+[
+  {
+      "name": "Pizza",
+      "description": "Cheese & Tomato",
+      "startTime": "2024-11-15T11:59:00",
+      "expiryTime": "2024-11-15T12:28:00"
+  },
+  {
+      "name": "Pasta",
+      "description": "Creamy Alfredo",
+      "startTime": "2024-11-15T10:48:00",
+      "expiryTime": "2024-11-15T10:59:00"
+  },
+  {
+      "name": "Salad",
+      "description": "Fresh Veggies",
+      "startTime": "2024-11-15T11:53:00",
+      "expiryTime": "2024-11-15T11:58:00"
+  }
+]

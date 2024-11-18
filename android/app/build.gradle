@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id 'dev.flutter.flutter-gradle-plugin'
+}
+
+android {
+    // Defining the namespace to match the package name
+    namespace = 'com.example.event_management_app'
+
+    // Set the compile SDK version
+    compileSdk = 34
+
+    // Define the NDK version, if needed
+    ndkVersion = '25.1.8937393'
+
+    // Compatibility options for Java and Kotlin
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true  // Enable core library desugaring
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        applicationId = 'com.example.event_management_app'
+        minSdk = 21  // Minimum SDK version supported
+        targetSdk = 34  // Target SDK version
+        versionCode = 1
+        versionName = '1.0.0'
+    }
+
+    buildTypes {
+        release {
+            // Define signing config for release builds
+            signingConfig = signingConfigs.debug  // Replace with release signing config for production
+        }
+    }
+}
+
+flutter {
+    source = '../..'  // Ensure the source points to the correct Flutter directory
+}
+
+dependencies {
+    // Core library desugaring for compatibility
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    // Add other dependencies as needed
+}

@@ -1,0 +1,71 @@
+name: event_management_app
+description: A Flutter app for managing events.
+
+publish_to: 'none' # Remove this line if you intend to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3 # Updated to reflect the minimum SDK for null safety
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobile_scanner: ^6.0.2
+  cupertino_icons: ^1.0.8
+  qr_flutter: ^4.1.0
+  http: ^1.2.2           # For making HTTP requests
+  provider: ^6.0.0       # For state management
+  flutter_localizations: # For localization support
+    sdk: flutter
+  shared_preferences: ^2.0.6 # For storing user preferences
+  font_awesome_flutter: ^10.0.0 # For using Font Awesome icons
+  google_fonts: ^6.2.1        # For using Google Fonts
+  dio: ^5.0.0
+  permission_handler: ^10.2.0
+  url_launcher: ^6.0.20
+  shared_preference_app_group: ^1.1.1
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+  intl: ^0.19.0
+  pretty_qr_code: ^3.3.0 
+  dart_jsonwebtoken: ^2.14.1
+  jwt_decoder: ^2.0.1
+  
+
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.10.0
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icon.png" # Path to your app icon image
+  adaptive_icon_background: "assets/icons/icon.png" # Background layer
+  adaptive_icon_foreground: "assets/icons/icon.png" # Foreground layer
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/backgroundimage.jpg
+    - assets/images/backgroundimage2.jpg
+    - assets/icons/icon.png
+    - assets/images/event1.jpg
+    - assets/images/event2.jpg
+    - assets/images/event3.jpg
+    - assets/events.json 
+    - assets/food.json 
+    - assets/details.json 
+    - assets/business_card.json 
+    - assets/event_images.json
+    
+    # Ensure this directory exists and contains event-related JSON data
+
+# Optional: Add a section for fonts if you have custom fonts
+fonts:
+  - family: YourCustomFontName
+    fonts:
+      - asset: assets/fonts/YourCustomFont.ttf
