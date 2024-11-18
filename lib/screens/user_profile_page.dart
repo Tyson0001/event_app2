@@ -1,5 +1,5 @@
-// import 'package:event_management_app/screens/business_card.dart';
-// import 'package:event_management_app/screens/qr_scanner.dart';
+// import 'package:GatherHub/screens/business_card.dart';
+// import 'package:GatherHub/screens/qr_scanner.dart';
 // import 'package:flutter/material.dart';
 // import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -119,8 +119,8 @@
 
 
 
-import 'package:event_management_app/screens/business_card.dart';
-import 'package:event_management_app/screens/qr_scanner_cardSHaring.dart';
+import 'package:GatherHub/screens/business_card.dart';
+import 'package:GatherHub/screens/qr_scanner_cardSHaring.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:shared_preferences/shared_preferences.dart';

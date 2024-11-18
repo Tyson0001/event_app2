@@ -1,5 +1,5 @@
-import 'package:event_management_app/screens/qr_scanner_food.dart';
-import 'package:event_management_app/screens/qr_scanner_organizer.dart';
+import 'package:GatherHub/screens/qr_scanner_food.dart';
+import 'package:GatherHub/screens/qr_scanner_organizer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
