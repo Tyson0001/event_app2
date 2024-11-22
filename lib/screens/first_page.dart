@@ -3,7 +3,6 @@ import 'package:GatherHub/screens/qr_scanner_organizer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
-import 'qr_scanner_cardSHaring.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({super.key});

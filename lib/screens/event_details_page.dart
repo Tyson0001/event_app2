@@ -1251,7 +1251,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   Widget _buildImageCarousel() {
     return SizedBox(
-      height: 400.0,
+      height: 350.0,
       child: eventImages == null
           ? Center(
               child: Column(
