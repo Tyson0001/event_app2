@@ -30,7 +30,8 @@ dependencies:
   intl: ^0.19.0
   pretty_qr_code: ^3.3.0 
   dart_jsonwebtoken: ^2.14.1
-  jwt_decoder: ^2.0.1
+  jwt_decoder: ^2.0.1 
+  carousel_slider: ^5.0.0 
   
 
 
@@ -60,7 +61,8 @@ flutter:
     - assets/food.json 
     - assets/details.json 
     - assets/business_card.json 
-    - assets/event_images.json
+    - assets/event_images.json 
+    - assets/project.json
     
     # Ensure this directory exists and contains event-related JSON data
 

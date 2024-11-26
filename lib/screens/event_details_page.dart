@@ -1427,6 +1427,7 @@ import 'mentor_page.dart';
 import 'helpline_page.dart';
 import 'notifications_page.dart';
 import 'food_counter_page.dart';
+import 'project_list.dart'; // Import the project list page
 
 class EventDetailsPage extends StatefulWidget {
   final Map<String, String> event;
@@ -1685,6 +1686,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         'icon': Icons.fastfood,
         'page': FoodCounterPage(event: widget.event),
       },
+      {
+        'label': 'Projects',
+        'icon': Icons.list,
+        'page': ProjectListPage(), // Navigates to the project list
+      },
     ];
 
     return GridView.count(
@@ -1733,4 +1739,3 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 }
-

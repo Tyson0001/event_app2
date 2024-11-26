@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:Event_App2/lib/main.dart'; // Ensure this imports the correct file for your `MyApp`.
+import "package:Event_App2/lib/main.dart"; // Ensure this imports the correct file for your `MyApp`.
 
 void main() {
   testWidgets('Initial screen shows login form', (WidgetTester tester) async {
