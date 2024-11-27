@@ -9,12 +9,15 @@ class ProjectDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    print("Project: $project");
     // Get list of image base64 strings
-    List<String> imageStrings = List<String>.from(project['projectImagesBase64']);
+    List<String> imageStrings =
+        List<String>.from(project['image']);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(project['projectTitle']),
+        title: Text(project['project_name']),
         backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
@@ -26,7 +29,14 @@ class ProjectDetailPage extends StatelessWidget {
             CarouselSlider.builder(
               itemCount: imageStrings.length,
               itemBuilder: (BuildContext context, int index, int realIndex) {
-                final imageBytes = base64Decode(imageStrings[index].split(',')[1]);
+                final imageBytes;
+                try {
+                  // imageBytes = base64Decode(imageStrings[index].split(',')[1]);
+                  imageBytes = base64Decode(imageStrings[index]);
+                } catch (e) {
+                  return const Center(child: Text('Error loading image'));
+                }
+
                 return Image.memory(
                   imageBytes,
                   fit: BoxFit.cover,
@@ -37,7 +47,7 @@ class ProjectDetailPage extends StatelessWidget {
                 enlargeCenterPage: true,
                 enableInfiniteScroll: true,
                 autoPlay: false,
-                aspectRatio: 16/9,
+                aspectRatio: 16 / 9,
                 viewportFraction: 0.9,
               ),
             ),
@@ -45,7 +55,7 @@ class ProjectDetailPage extends StatelessWidget {
 
             // Project Title
             Text(
-              project['projectTitle'],
+              project['project_name'],
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -55,7 +65,7 @@ class ProjectDetailPage extends StatelessWidget {
 
             // Group Number
             Text(
-              'Group Number: ${project['groupNumber']}',
+              'Group Number: ${project['Group_number']}',
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.red,
@@ -65,7 +75,7 @@ class ProjectDetailPage extends StatelessWidget {
 
             // Project Details
             Text(
-              project['projectDetails'],
+              project['Description'],
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16.0),
@@ -75,11 +85,11 @@ class ProjectDetailPage extends StatelessWidget {
               'Group Members:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ...project['groupMembers'].map<Widget>((member) {
+            ...project['members'].map<Widget>((member) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Text(
-                  '${member['name']} (Roll No: ${member['rollNumber']}) - ${member['contribution']}',
+                  '${member['name']} (Roll No: ${member['roll_no']}) - ${member['contribution']}',
                   style: const TextStyle(fontSize: 16),
                 ),
               );
@@ -91,7 +101,7 @@ class ProjectDetailPage extends StatelessWidget {
               'Faculty Members:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ...project['facultyMembers'].map<Widget>((faculty) {
+            ...project['Faculty'].map<Widget>((faculty) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Text(
